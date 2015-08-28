@@ -37,6 +37,7 @@
 		{
 		    $returned_brands = $GLOBALS['DB']->query("SELECT * FROM brands;");
 		    $brands = array();
+		    
 		    foreach ($returned_brands as $brand) {
 		        $id = $brand['id'];
 		        $name = $brand['name'];
@@ -96,6 +97,4 @@
 		    return $stores;
         }
     }
-
-	}
 ?>

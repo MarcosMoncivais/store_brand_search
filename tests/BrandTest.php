@@ -7,16 +7,14 @@
 
 
         require_once "src/Brand.php";
-
         require_once "src/Store.php";
 
         $server = 'mysql:host=localhost;dbame=shoes_test';
-        $username = 'root';
+        $user = 'root';
         $password = 'root';
-
         $DB = new PDO($server, $username, $password);
 
-        class BrandTest extends PHPUnit_FrameworkTestCase
+        class BrandTest extends PHPUnit_Framework_TestCase
         {
             protected function tearDown()
             {
@@ -58,7 +56,7 @@
                 $this->assertEquals([], $result);
             }
 
-            function getAll()
+            function testGetAll()
             {
                 //Arrange
                 $id = null;
@@ -66,7 +64,8 @@
                 $test_brand = new Brand($id, $name);
                 $test_brand->save();
 
-                $name2 = "Nike"
+                $id2 = null;
+                $name2 = "Nike";
                 $test_brand2 = new Brand($id, $name2);
                 $test_brand2->save();
 
@@ -151,6 +150,6 @@
                 //Assert
                 $this->assertEquals([$test_store, $test_store2], $result);
             }
-                //methods being left out: update(), delete(),
+                
         }
 ?>

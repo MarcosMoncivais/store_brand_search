@@ -10,7 +10,7 @@
         require_once "src/Store.php";
 
         $server = 'mysql:host=localhost:8889;dbname=shoes_test';
-        $user = 'root';
+        $username = 'root';
         $password = 'root';
         $DB = new PDO($server, $username, $password);
 

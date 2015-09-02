@@ -133,7 +133,7 @@ CREATE TABLE `stores` (
 -- Table structure for table `stores_brands`
 --
 
-CREATE TABLE `stores_brands` (
+CREATE TABLE `brands_stores` (
   `id` bigint(20) unsigned NOT NULL,
   `store_id` int(11) DEFAULT NULL,
   `brand_id` int(11) DEFAULT NULL
@@ -181,7 +181,7 @@ ALTER TABLE `stores`
 --
 -- AUTO_INCREMENT for table `stores_brands`
 --
-ALTER TABLE `stores_brands`
+ALTER TABLE `brands_stores`
   MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

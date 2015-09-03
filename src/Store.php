@@ -2,13 +2,14 @@
     
     class Store
     {
-        private $id;
         private $name;
+        private $id;
         
-        function __construct($id, $name)
+        
+        function __construct($name, $id = null)
         {
-            $this->id = $id;
             $this->name = $name;
+            $this->id = $id;
         }
         
         function getId()
@@ -25,6 +26,13 @@
         {
             $this->name = $new_name;
         }
+
+        function updateName($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE stores SET name = '{new_name}'
+                WHERE id = {$this->getId()}");
+            $this->setName($new_name);
+        }
         
         function save()
         {
@@ -32,11 +40,11 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
         
-        function update($new_name)
-        {
-            $GLOBALS['DB']->exec("UPDATE stores SET name = '{$new_name}' WHERE id = {$this->getId()};");
-            $this->setName($new_name);
-        }
+        // function update($new_name)
+        // {
+        //     $GLOBALS['DB']->exec("UPDATE stores SET name = '{$new_name}' WHERE id = {$this->getId()};");
+        //     $this->setName($new_name);
+        // }
         
         function delete()
         {
@@ -49,21 +57,15 @@
             $returned_stores = $GLOBALS['DB']->query("SELECT * FROM stores;");
             $stores = array();
             foreach ($returned_stores as $store) {
-                $id = $store['id'];
                 $name = $store['name'];
-                $new_store = new Store($id, $name);
+                $id = $store['id'];
+                $new_store = new Store($name, $id);
                 array_push($stores, $new_store);
             }
             
             return $stores;
         }
 
-        static function deleteAll()
-        {
-            $GLOBALS['DB']->exec("DELETE FROM stores;");
-            $GLOBALS['DB']->exec("DELETE FROM stores_brands;");
-        }
-        
         static function find($search_id)
         {
             $found_store = null;
@@ -79,7 +81,7 @@
 
         function addBrand($new_brand)
         {
-            $GLOBALS['DB']->exec("INSERT INTO stores_brands (store_id, brand_id) VALUES ({$this->getId()}, {$new_brand->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO stores_brands (store_id, brand_id) VALUES ({$this->getId()}, {$brand_id});");
         }
         
         function getBrands()
@@ -91,13 +93,29 @@
                     WHERE stores.id = {$this->getId()};
                 ");
             $brands = array();
-            foreach ($query as $brand) {
+            foreach ($brands as $brand) {
                 $id = $brand['id'];
                 $name = $brand['name'];
-                $new_brand = new Brand($id, $name);
+                $new_brand = new Brand($name, $id);
                 array_push($brands, $new_brand);
             }
             return $brands;
         }
+
+        function deleteBrand($brand_id)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stores_brands WHERE brand_id = {$brand_id} AND store_id = {$this->id}");
+        }
+
+        function deleteAllBrands()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stores_brands WHERE store_id = {$this->id}");
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stores;");
+        }
+        
     }
 ?>

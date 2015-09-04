@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>Shoe Stores</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div class="container">
+		<h1>Check local shoe inventory here!</h1>
+
+		{% if stores is not empty%}
+			<h3>All stores:</h3>
+			<ul>
+				{% for store in stores %}
+					<li><h3><strong><a href="/stores/{{ store.getId }}">{{ store.getName }}</a></strong></h3></li>
+				{% end for %}
+			</ul>
+		{% else %}
+			<h4>It's lonely in here...</h4>
+		{% endif %}
+
+</body>
+
+
+
+
+</html>

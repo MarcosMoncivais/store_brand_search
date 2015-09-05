@@ -39,19 +39,19 @@
             $GLOBALS['DB']->exec("INSERT INTO stores (name) VALUES ('{$this->getName()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
-        
-        // function update($new_name)
-        // {
-        //     $GLOBALS['DB']->exec("UPDATE stores SET name = '{$new_name}' WHERE id = {$this->getId()};");
-        //     $this->setName($new_name);
-        // }
-        
-        // function delete()
-        // {
-        //     $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()};");
-        //     $GLOBALS['DB']->exec("DELETE FROM brands_stores WHERE store_id = {$this->getId()};");
-        // }
-        
+
+        function deleteBrand($brand_id)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores WHERE store_id = {$this->getId()};");
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores");
+               $GLOBALS['DB']->exec("DELETE FROM stores;");
+
+        }
         static function getAll()
         {
             $returned_stores = $GLOBALS['DB']->query("SELECT * FROM stores ORDER BY name;");
@@ -79,9 +79,9 @@
             return $found_store;
         }
 
-        function addBrand($brand)
+        function addBrand($brand_id)
         {
-            $GLOBALS['DB']->exec("INSERT INTO brands_stores (store_id, brand_id) VALUES ({$this->getId()}, {$brand->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO brands_stores (store_id, brand_id) VALUES ({$this->getId()}, {$brand_id});");
         }
         
         function getBrands()
@@ -101,19 +101,5 @@
             }
             return $brands;
         }
-
-        function deleteBrand($brand_id)
-        {
-            $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("DELETE FROM brands_stores WHERE store_id = {$this->getId()};");
-        }
-
-        static function deleteAll()
-        {
-            $GLOBALS['DB']->exec("DELETE FROM brands_stores");
-               $GLOBALS['DB']->exec("DELETE FROM stores;");
-
-        }
-        
     }
 ?>

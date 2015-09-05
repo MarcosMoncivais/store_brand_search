@@ -55,25 +55,6 @@
                 $result = Store::getAll();
                 $this->assertEquals($test_store, $result[0]);
             }
-
-            // function test_deleteStore()
-            // {
-            //     //Arrange
-            //     $name = "Allen Edmonds";
-            //     $test_store = new Store($name, $id);
-            //     $test_store->save();
-
-            //     $name2 = "To Boot NY";
-            //     $test_store2 = new Store($name2, $id);
-            //     $test_store2->save();
-
-            //     //Act
-            //     $test_store->delete();
-            //     $result = Store::getAll();
-                
-            //     //Assert
-            //     $this->assertEquals([$test_store2], $result);
-            // }
                     
             function test_GetAll()
             {
@@ -93,25 +74,6 @@
                 //Will be returned, ordered by name.
                 $this->assertEquals([$test_store2, $test_store], $result);
             }
-            
-            // function test_DeleteAll()           
-            // {
-            //     //Arrange
-            //     $name = "Nordstroms";
-            //     $test_store = new Store($name);
-            //     $test_store->save();
-                
-            //     $name2 = "Zumiez";
-            //     $test_store2 = new Store($name2);
-            //     $test_store2->save();
-                
-            //     //Act
-            //     Store::deleteAll();
-                
-            //     //Assert
-            //     $result = Store::getAll();
-            //     $this->assertEquals([], $result);
-            // }
             
             function test_Find()
             {
@@ -159,43 +121,23 @@
                 $this->assertEquals(true, is_numeric($result));
             }
             
-            // function test_DeleteStore()
-            // {
-            //     //Arrange
-            //     $id = null;
-            //     $name = "Nordstroms";
-            //     $test_store = new Store($name, $id);
-            //     $test_store->save();
+            function test_AddBrand()
+            {
+                //Arrange
+                $name = "Nike";
+                $test_brand = new Brand($name, $id);
+                $test_brand->save();
                 
-            //     $name2 = "Zumiez";
-            //     $test_store2 = new Store($name2, $id);
-            //     $test_store2->save();
+                $name = "Nordstroms";
+                $test_store = new Store($name, $id);
+                $test_store->save();
                 
-            //     //Act
-            //     $test_store->delete();
+                //Act
+                $test_store->addBrand($test_brand->getId());
                 
-            //     //Assert
-            //     $result = Store::getAll();
-            //     $this->assertEquals([$test_store2], $result);
-            // }
-            
-            // function test_AddBrand()
-            // {
-            //     //Arrange
-            //     $name = "Nike";
-            //     $test_brand = new Brand($name);
-            //     $test_brand->save();
-                
-            //     $name = "Nordstroms";
-            //     $test_store = new Store($name);
-            //     $test_store->save();
-                
-            //     //Act
-            //     $test_store->addBrand($test_brand);
-                
-            //     //Assert
-            //     $this->assertEquals([$test_brand], $result);
-            // }
+                //Assert
+                $this->assertEquals($test_store->getBrands(), [$test_brand]);
+            }
             
             function test_GetBrands()
             {
@@ -221,51 +163,5 @@
                 $result = $test_store->getBrands();
                 $this->assertEquals([$test_brand, $test_brand2], $result); 
         }
-
-        // function test_deleteBrand()
-        // {
-        //     $name = "Nordstroms";
-        //     $test_store = new Store($name, $id);
-        //     $test_store->save();
-
-        //     $brand_name = "Nike";
-        //     $test_brand = new Brand($brand_name, $id);
-        //     $test_brand->save();
-
-        //     $brand_name2 = "Adidas";
-        //     $test_brand2 = new Brand($brand_name2, $id);
-        //     $test_brand2->save();
-
-        //     $test_store->addBrand($test_brand->getId());
-        //     $test_store->addBrand($test_brand2->getId());
-
-        //     $test_store->deleteBrand($test_brand->getId());
-        //     $result = $test_store ->getBrands();
-
-        //     $this->assertEquals([], $result);
-        // }
-
-    //     function test_deleteAllbrands()
-    //     {
-    //         $name = "Nordstroms";
-    //         $test_store = new Store($name, $id);
-    //         $test_store->save();
-
-    //         $name = "Nike";
-    //         $test_brand = new Brand($name, $id);
-    //         $test_brand->save();
-
-    //         $name2 = "Adidas";
-    //         $test_brand2 = new Brand($name2, $id);
-    //         $test_brand2->save();
-
-    //         $test_store->addBrand($test_brand->getId());
-    //         $test_store->addBrand($test_brand2->getId());
-
-    //         $test_store->deleteAll();
-    //         $result = $test_store ->getBrands();
-
-    //         $this->assertEquals([], $result);
-    //     }
     }
 ?>

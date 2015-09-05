@@ -9,7 +9,20 @@ Install the necessary dependencies via Composer by going into the top project fo
 Import the MYSQL database 
 Start a PHP server in the 'web' folder of the project.
 Navigate to root path in a web browser.
-**Setting up the PostgreSQL database: After cloning the repository, go into the command line and open a MYSQL shell in the top project folder. Run the command CREATE DATABASE shoes; Then run the command \i shoes.sql to import the existing database.
+
+**DATABASE SETUP**
+$ /Applications/MAMP/Library/bin/mysql --host=localhost -uroot -proot;
+
+$ CREATE DATABASE shoes;
+
+$ USE shoes;
+
+$ CREATE TABLE stores (name varchar (255), id serial PRIMARY KEY);
+
+$ CREATE TABLE brands (name varchar (255), id serial PRIMARY KEY);
+
+$ CREATE TABLE brands_stores (brand_id int, store_id int, id serial PRIMARY KEY);
+
 
 
 * PHP

@@ -40,6 +40,15 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+<<<<<<< HEAD
+=======
+        function deleteBrand($brand_id)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores WHERE store_id = {$this->getId()};");
+        }
+
+>>>>>>> 8d7fa0448bc6486935a887a361e0cb57057bfb13
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM brands_stores");
@@ -73,9 +82,15 @@
             return $found_store;
         }
 
+<<<<<<< HEAD
         function addBrand($brand)
         {
             $GLOBALS['DB']->exec("INSERT INTO brands_stores (store_id, brand_id) VALUES ({$this->getId()}, {$brand->getId()});");
+=======
+        function addBrand($brand_id)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO brands_stores (store_id, brand_id) VALUES ({$this->getId()}, {$brand_id});");
+>>>>>>> 8d7fa0448bc6486935a887a361e0cb57057bfb13
         }
         
         function getBrands()
@@ -95,6 +110,7 @@
             }
             return $brands;
         }
+<<<<<<< HEAD
         function deleteBrand($brand_id)
         {
             $GLOBALS['DB']->exec("DELETE FROM stores_brands WHERE brand_id = {$brand_id} AND store_id = {$this->id}");
@@ -104,5 +120,7 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM stores_brands WHERE store_id = {$this->id}");
         }
+=======
+>>>>>>> 8d7fa0448bc6486935a887a361e0cb57057bfb13
     }
 ?>

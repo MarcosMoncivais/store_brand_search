@@ -133,11 +133,7 @@
                 $test_store->save();
                 
                 //Act
-<<<<<<< HEAD
                 $test_store->addBrand($test_brand);
-=======
-                $test_store->addBrand($test_brand->getId());
->>>>>>> 8d7fa0448bc6486935a887a361e0cb57057bfb13
                 
                 //Assert
                 $this->assertEquals($test_store->getBrands(), [$test_brand]);
